@@ -1,0 +1,79 @@
+import pygame
+pygame.init()
+screen = pygame.display.set_mode((1280, 720))
+clock = pygame.time.Clock()
+
+counter, text = 0, '0'.rjust(3)
+
+off1 = 0
+off2 = 0
+off3 = 0
+off4 = 0
+off5 = 0
+off6 = 0
+off7 = 0
+off8 = 0
+off9 = 0
+offset = [off1, off2, off3, off4, off5, off6, off7, off8]
+text1= str(counter)
+text2= str(counter)
+text3= str(counter)
+text4= str(counter)
+text5= str(counter)
+text6= str(counter)
+text7= str(counter)
+text8= str(counter)
+display= [text1, text2, text3, text4, text5, text6, text7, text8]
+pygame.time.set_timer(pygame.USEREVENT, 1000)
+font = pygame.font.SysFont('Consolas', 30)
+def show(timer):
+    
+    text =  str(counter-offset[timer]).rjust(3)
+    return text
+def convert_seconds(text):
+    time = counter-offset[timer]
+    minutes = time // 60
+    remaining_seconds = time % 60
+    text = f"{minutes}:{remaining_seconds}"
+    if remaining_seconds<10:
+        text = f"{minutes}:0{remaining_seconds}"
+    return text
+run = True
+while run:
+    for e in pygame.event.get():
+        if e.type == pygame.USEREVENT: 
+            counter +=1
+        if e.type == pygame.KEYDOWN:
+            if e.key == pygame.K_KP1:
+                offset[0]=counter
+            elif e.key == pygame.K_KP2:
+                offset[1]=counter
+            elif e.key == pygame.K_KP3:
+                offset[2]=counter
+            elif e.key == pygame.K_KP4:
+                offset[3]=counter
+            elif e.key == pygame.K_KP5:
+                offset[4]=counter
+            elif e.key == pygame.K_KP6:
+                offset[5]=counter
+            elif e.key == pygame.K_KP7:
+                offset[6]=counter
+            elif e.key == pygame.K_KP8:
+                offset[7]=counter
+        if e.type == pygame.QUIT: 
+            run = False
+
+    screen.fill((255, 255, 255))
+    for timer in range(len(display)):
+        text = show(timer)
+        if ((counter-offset[timer])>59):
+            text = convert_seconds(text)
+        if timer <= 3:
+            x = (timer+1)*256
+            y = 220
+        else: 
+            x = (timer-3)*256
+            y = 500
+        screen.blit(font.render(text, True, (0, 0, 0)), (x,y))
+    pygame.display.flip()
+    clock.tick(60)
