@@ -60,6 +60,48 @@ while run:
                 offset[6]=counter
             elif e.key == pygame.K_KP8:
                 offset[7]=counter
+        if e.type == pygame.FINGERDOWN:
+            finger_x, finger_y = e.pos
+            if finger_y< 360:
+                if finger_x<380:
+                    offset[0]=counter
+                elif finger_x<512:
+                    offset[1]=counter
+                elif finger_x<892:
+                    offset[2]=counter
+                elif finger_x<1280:
+                    offset[3]=counter
+            if finger_y< 360:
+                if finger_x<380:
+                    offset[4]=counter
+                elif finger_x<512:
+                    offset[5]=counter
+                elif finger_x<892:
+                    offset[6]=counter
+                elif finger_x<1280:
+                    offset[7]=counter
+        if e.type == pygame.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = e.pos
+            if mouse_y< 360:
+                if mouse_x<320:
+                    offset[0]=counter
+                elif mouse_x<640:
+                    offset[1]=counter
+                elif mouse_x<960:
+                    offset[2]=counter
+                elif mouse_x<1280:
+                    offset[3]=counter
+            if mouse_y> 360:
+                if mouse_x<320:
+                    offset[4]=counter
+                elif mouse_x<640:
+                    offset[5]=counter
+                elif mouse_x<960:
+                    offset[6]=counter
+                elif mouse_x<1280:
+                    offset[7]=counter
+            
+                
         if e.type == pygame.QUIT: 
             run = False
 
